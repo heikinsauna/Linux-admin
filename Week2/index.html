@@ -14,7 +14,7 @@
     }
 
     body {
-        background-color: #BFC1C2; /* Silver Sand */
+        background-color: #BFC1C2;
         min-height: 100vh;
         display: flex;
         justify-content: center;
@@ -63,6 +63,10 @@
         font-weight: 600;
         transition: 0.3s;
     }
+    .arrow{
+        font-size:2rem;
+        color:#476481;
+    }
 
     a:hover {
         background: #2C445A;
@@ -78,8 +82,9 @@
     <div class="subtitle">Website visitor calculator</div>
 
     <p>
-        This website uses Flask and PostgreSQL database to count visitors.
+        This website uses Python and Flask to count visitors of this website. Count of visitors is saved to PostgreSQL database. Website is hosted using Nginx.
     </p>
+    <br>
     <p>
 	visitors: 
 	<strong id="visitor-count">...</strong>
@@ -88,7 +93,39 @@
     <a href="https://github.com" target="_blank">
         Visit Project GitHub
     </a>
+    <br>
+    <br>
+    <a href="http://195.148.22.221" target="_blank">
+	Main page / Week 1
+    </a>
+	<br>
+	<br>      
+	<div class="icon">🌐</div>
+	<h3>User Browser</h3>
+	<p>Opens the website</p>
+        <div class="arrow">↓</div>
+	<div class="icon">⚙️</div>
+	<h3>Nginx</h3>
+	<p>Web server</p>
+        <div class="arrow">↓</div>
+	<div class="icon">🐍</div>
+	<h3>Flask App</h3>
+	<p>Processes requests and visitor counts</p>
+        <div class="arrow">↓</div>
+	<div class="icon">🗄️</div>
+	<h3>PostgreSQL</h3>
+	<p>Stores visitor count data</p>
+	<h3>systemd Services</h3>
+                <div>nginx.service</div>
+                <div>webstats.service</div>
+                <div>postgresql.service</div>
+	<br>
+            <p>
+		webstats.service, PostgreSQL and Nginx services are all enabled to launch at boot. So visitor counter and website will be available even if server restarts.
+            </p>
+        </div>
 </div>
+
 
 
 <script>
