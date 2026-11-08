@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2: Python webapp</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+        background-color: #BFC1C2; /* Silver Sand */
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #2F3A44;
+    }
+
+    .container {
+        background: rgba(255,255,255,0.65);
+        backdrop-filter: blur(10px);
+        padding: 2.5rem;
+        border-radius: 18px;
+        width: 90%;
+        max-width: 550px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        text-align: center;
+    }
+
+    h1 {
+        color: #1F2933;
+        font-size: 2.5rem;
+        margin-bottom: 0.75rem;
+        letter-spacing: 1px;
+    }
+
+    .subtitle {
+        color: #69737D;
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+
+    p {
+        color: #4A5560;
+        margin-bottom: 1.5rem;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    a {
+        display: inline-block;
+        text-decoration: none;
+        background: #3B5A77;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    a:hover {
+        background: #2C445A;
+        transform: translateY(-2px);
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Week 2</h1>
+
+    <div class="subtitle">Website visitor calculator</div>
+
+    <p>
+        This website uses Flask and PostgreSQL database to count visitors.
+    </p>
+    <p>
+	visitors: 
+	<strong id="visitor-count">...</strong>
+    </p>
+
+    <a href="https://github.com" target="_blank">
+        Visit Project GitHub
+    </a>
+</div>
+
+
+<script>
+async function registerVisit() {
+	try {
+		const response = await fetch("/viikko2/api/visit", {
+
+			method: "POST",
+
+			headers: {
+				"Content-Type": "application/json"
+			},
+
+			body: JSON.stringify({path: window.location.pathname})
+		});
+		if (!response.ok) {
+			throw new Error("HTTP " + response.status);
+		}
+
+		const data = await response.json();
+
+		document.getElementById("visitor-count").textContent = data.visits;
+
+	}
+	catch (error) {
+		console.error("Vierailun rekisterointi epaonnistui: ", error);
+
+		document.getElementById("visitor-count").textContent = "ei saatavilla";
+	}
+}
+registerVisit();
+</script>
+</body>
+</html>

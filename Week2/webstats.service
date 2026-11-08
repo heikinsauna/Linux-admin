@@ -1,0 +1,21 @@
+[Unit]
+Description=viikko2 Webstats
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+
+User=www-data
+Group=www-data
+
+WorkingDirectory=/var/www/webbisivu
+
+EnvironmentFile=/etc/webbisivu/webstats.env
+
+ExecStart=/var/www/webbisivu/venv/bin/gunicorn --workers 2 --bind 127.0.0.1:8000 app:app
+
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
